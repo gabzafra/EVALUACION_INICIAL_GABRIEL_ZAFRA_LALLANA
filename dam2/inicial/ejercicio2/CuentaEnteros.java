@@ -9,12 +9,11 @@ public class CuentaEnteros {
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
     ArrayList<Integer> listaNumeros = new ArrayList<>();
-    int entrada;
     boolean flag = true;
 
     while (flag) {
       System.out.println("Escriba un entero positivo o -1 para terminar");
-      entrada = input.nextInt();
+      int entrada = input.nextInt();
       if (entrada > 0) {
         listaNumeros.add(entrada);
       } else if (entrada == -1 && listaNumeros.size() > 0) {
