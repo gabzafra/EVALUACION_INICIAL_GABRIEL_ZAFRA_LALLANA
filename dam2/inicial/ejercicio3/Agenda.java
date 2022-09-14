@@ -1,13 +1,42 @@
 package dam2.inicial.ejercicio3;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Agenda {
 
   public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+
     ArrayList<Contacto> agenda = initAgenda();
-    pintarMenu();
-    listarContactos(agenda);
+
+    boolean haTerminado = false;
+    while (!haTerminado) {
+      pintarMenu();
+      switch (input.nextLine()) {
+        case "1" -> showContactDetail(findContactByName(agenda));
+        case "2" -> System.out.println("Add");
+        case "3" -> System.out.println("Del");
+        case "s" -> haTerminado = true;
+        default -> System.out.println("Error");
+      }
+    }
+  }
+
+  private static Contacto findContactByName(ArrayList<Contacto> agenda) {
+    Scanner input = new Scanner(System.in);
+    Contacto contacto = new Contacto("", "", "", "");
+
+    while (contacto.nombre().length() == 0) {
+      listarContactos(agenda);
+      System.out.println("Escriba el nombre del contacto que desea ver:");
+      String entrada = input.nextLine();
+      contacto = agenda.stream()
+          .filter(record -> record.nombre().equals(entrada))
+          .findFirst()
+          .orElse(contacto);
+    }
+    return contacto;
   }
 
   private static Contacto addContact() {
@@ -18,8 +47,13 @@ public class Agenda {
     return false;
   }
 
-  private static void showContactDetail(String name) {
-
+  private static void showContactDetail(Contacto contacto) {
+    System.out.println("------------------");
+    System.out.println("Nombre: " + contacto.nombre());
+    System.out.println("Apellidos: " + contacto.apellidos());
+    System.out.println("Dirección: " + contacto.direccion());
+    System.out.println("Teléfono: " + contacto.telefono());
+    System.out.println("------------------");
   }
 
   private static void pintarMenu() {
