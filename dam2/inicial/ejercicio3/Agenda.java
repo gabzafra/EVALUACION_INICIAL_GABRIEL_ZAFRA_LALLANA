@@ -10,6 +10,18 @@ public class Agenda {
     listarContactos(agenda);
   }
 
+  private static Contacto addContact() {
+    return new Contacto("", "", "", "");
+  }
+
+  private static boolean deleteContactByName(String name) {
+    return false;
+  }
+
+  private static void showContactDetail(String name) {
+
+  }
+
   private static void pintarMenu() {
     System.out.println("Elija una opción :");
     System.out.println("1. Ver un contacto.");
