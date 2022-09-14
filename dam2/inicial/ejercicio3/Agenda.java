@@ -16,7 +16,7 @@ public class Agenda {
       pintarMenu();
       switch (input.nextLine()) {
         case "1" -> showContactDetail(findContactByName(agenda));
-        case "2" -> System.out.println("Add");
+        case "2" -> agenda.add(newContact());
         case "3" -> agenda = deleteContactByName(agenda);
         case "s" -> haTerminado = true;
         default -> System.out.println("Error");
@@ -40,8 +40,17 @@ public class Agenda {
     return contacto;
   }
 
-  private static Contacto addContact() {
-    return new Contacto("", "", "", "");
+  private static Contacto newContact() {
+    Scanner input = new Scanner(System.in);
+    System.out.println("Escriba el nombre del contacto que desea crear:");
+    String nombre = input.nextLine();
+    System.out.println("Escriba los apellidos del contacto que desea crear:");
+    String apellidos = input.nextLine();
+    System.out.println("Escriba la dirección del contacto que desea crear:");
+    String direccion = input.nextLine();
+    System.out.println("Escriba el telefono del contacto que desea crear:");
+    String telefono = input.nextLine();
+    return new Contacto(nombre, apellidos, direccion, telefono);
   }
 
   private static ArrayList<Contacto> deleteContactByName(ArrayList<Contacto> agenda) {
