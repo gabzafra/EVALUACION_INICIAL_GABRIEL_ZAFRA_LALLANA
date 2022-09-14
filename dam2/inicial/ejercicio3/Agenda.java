@@ -2,6 +2,7 @@ package dam2.inicial.ejercicio3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Agenda {
 
@@ -16,7 +17,7 @@ public class Agenda {
       switch (input.nextLine()) {
         case "1" -> showContactDetail(findContactByName(agenda));
         case "2" -> System.out.println("Add");
-        case "3" -> System.out.println("Del");
+        case "3" -> agenda = deleteContactByName(agenda);
         case "s" -> haTerminado = true;
         default -> System.out.println("Error");
       }
@@ -43,8 +44,14 @@ public class Agenda {
     return new Contacto("", "", "", "");
   }
 
-  private static boolean deleteContactByName(String name) {
-    return false;
+  private static ArrayList<Contacto> deleteContactByName(ArrayList<Contacto> agenda) {
+    Scanner input = new Scanner(System.in);
+    listarContactos(agenda);
+    System.out.println("Escriba el nombre del contacto que desea eliminar:");
+    String entrada = input.nextLine();
+    return agenda.stream()
+        .filter(record -> !record.nombre().equals(entrada))
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 
   private static void showContactDetail(Contacto contacto) {
