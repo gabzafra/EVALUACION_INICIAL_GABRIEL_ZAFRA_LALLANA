@@ -19,7 +19,7 @@ public class Agenda {
         case "2" -> agenda.add(newContact());
         case "3" -> agenda = deleteContactByName(agenda);
         case "s" -> haTerminado = true;
-        default -> System.out.println("Error");
+        default -> System.err.println("La opción seleccionada no es valida.");
       }
     }
   }
